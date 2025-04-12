@@ -44,7 +44,6 @@ The app provides an easy-to-use interface for uploading files directly to your A
 ```bash
 photo-drop/
 ├── index.html          # Frontend UI
-├── style.css           # Basic styling
+├── style.css           # Basic styling with NES.css
 ├── script.js           # Handles file upload via pre-signed URL
 ├── README.md           # You're here
-└── LICENSE             # (optional) Add license file for your project
