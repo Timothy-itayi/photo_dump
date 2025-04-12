@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Photo Drop</title>
+  <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
+  <!-- Add Press Start 2P from Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: 'Press Start 2P', cursive;
+    }
+
+    .card {
+      width: 550px;
+      padding: 40px;
+      text-align: center;
+    }
+
+    input[type="file"] {
+      margin: 20px auto;
+      padding: 12px;
+      width: auto;
+      display: block;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 24px;
+    }
+
+    .upload-gif {
+      width: 100%;
+      max-height: 220px;
+      object-fit: contain;
+      margin-bottom: 30px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="nes-container is-rounded is-dark card">
+    <img class="upload-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExb2g1aXZqaHZzbWFiMGZrMW53MDU2OGc5YjU0enJnbmk2ZnRzNWcwdSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3GSoFVODOkiPBFArlu/giphy.gif" alt="Upload GIF">
+    <h2 class="nes-text is-primary">Drop a photo</h2>
+    <input type="file" id="fileInput" class="nes-input" />
+    <button class="nes-btn is-success" onclick="upload()">Upload</button>
+  </div>
+
+  <script>
+    async function upload() {
+      const fileInput = document.getElementById('fileInput');
+      const file = fileInput.files[0];
+      if (!file) return alert('No file selected');
+
+      const res = await fetch(`https://l15dzs1cz5.execute-api.ap-southeast-2.amazonaws.com/get-presigned-url?fileName=${file.name}&fileType=${file.type}`);
+      const { uploadURL } = await res.json();
+
+      const result = await fetch(uploadURL, {
+        method: 'PUT',
+        headers: { 'Content-Type': file.type },
+        body: file
+      });
+
+      if (result.ok) alert('Upload successful!');
+      else alert('Upload failed.');
+    }
+  </script>
+</body>
+</html>
