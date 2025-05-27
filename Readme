@@ -6,7 +6,8 @@ A simple web application that allows users to upload images directly to an AWS S
 npm install
 npm run start 
 
-![Screenshot](https://raw.githubusercontent.com/Timothy-itayi/photo_dump/refs/heads/main/photodump.png)
+![Screenshot](https://raw.githubusercontent.com/Timothy-itayi/photo_dump/main/photodump.png
+)
 
 ## 🚀 Project Purpose
 
